@@ -1,0 +1,121 @@
+* {
+  padding: 0;
+  margin: 0;
+  border: none;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+header {
+  background-color: #7b7;
+  color: white;
+}
+
+header h1 {
+  font-family: sans-serif;
+}
+
+main {
+  background-color: #ddd;
+}
+
+main #ball {
+  background-color: red;
+  border-radius: 50%;
+}
+
+main #player-0 {
+  background-color: #772;
+}
+
+main #player-1 {
+  background-color: #277;
+}
+
+header h1 {
+  padding: 10px 5px;
+  text-align: center;
+}
+
+main {
+  position: relative;
+}
+
+main .player {
+  position: absolute;
+  height: 150px;
+  width: 30px;
+}
+
+main #player-0 {
+  left: 0;
+  top: 30%;
+}
+
+main #player-1 {
+  right: 0;
+  top: 30%;
+}
+
+main #ball {
+  position: absolute;
+  top: 48%;
+  left: 48%;
+  height: 25px;
+  width: 25px;
+}
+
+footer {
+  background-color: #333;
+  color: #ccc;
+  font-family: monospace;
+  font-size: 1.02em;
+  padding: 5px 5px;
+  text-align: center;
+}
+
+footer p {
+  padding: 5px;
+  font-weight: bold;
+}
+
+footer a {
+  padding: 3px;
+}
+
+footer a:link {
+  color: #aff;
+  text-decoration: none;
+}
+
+footer a:visited {
+  color: #aaf;
+}
+
+footer a:hover {
+  font-weight: bolder;
+}
+
+footer address {
+  font-style: normal;
+  font-family: sans-serif;
+  font-size: 0.7em;
+}
+
+body {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100vh;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+}
+
+body main {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+/*# sourceMappingURL=style.css.map */
