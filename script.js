@@ -186,5 +186,4 @@ function drawCir(ball) {
 }
 function gameOver() {
     document.getElementById('#GameOver').display="block";
-    
 }
