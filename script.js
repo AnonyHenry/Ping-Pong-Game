@@ -121,13 +121,9 @@ function moveBall() {
     ctx.clearRect(ball.x - ball.r, ball.y - ball.r, ball.r * 2, ball.r * 2);
     ball.stepsX += ball.speedX;
     ball.stepsY += ball.speedY;
-    console.log(ball.negateSpeedX);
-    console.log(ball.negateSpeedY);
 
     //Checking if ball hit the area of player-0
     if (ball.stepsX < -(canvas.w / 2 - playrsCP.w - ball.r)) {
-        console.log(ball.y);
-        console.log(playrs[currntPlayr].y);
         if (ballIsHit()) {
             ball.stepsX = -(canvas.w / 2 - playrsCP.w - ball.r);
             currntPlayr = Number(!currntPlayr);
@@ -155,7 +151,7 @@ function moveBall() {
         ball.negateSpeedY = false;
     }
     //Checking if Ball went Beyond the width of canvas in either direction
-    if (ball.x<0 || ball.x>canvas.w){
+    if (ball.x< 0-ball.r || ball.x>canvas.w+ball.r){
         ball=null;
         gameOver();
         return 0;
@@ -185,5 +181,5 @@ function drawCir(ball) {
     ctx.restore();
 }
 function gameOver() {
-    document.getElementById('#GameOver').display="block";
+    document.getElementById('GameOver').classList.remove('d-none');
 }
