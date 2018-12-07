@@ -13,9 +13,6 @@ window.onload = function init() {
     ctx = canvas.dom.getContext('2d');
     playrsCP = {
         get y() {
-            console.log(canvas.h);
-            console.log(this.h);
-            console.log(this.steps);
             return (canvas.h - this.h) / 2 + this.steps;
         },
         w: 27,
@@ -45,44 +42,136 @@ window.onload = function init() {
         r: 15,
         stepsX: 0,
         stepsY: 0,
+        negateSpeedX: false,
+        negateSpeedY: false,
         get speedX() {
-            let rand = Math.random() * 2.3;
-            while (rand < 1.7) {
-                rand = Math.random() * 2.3;
-            }
-            console.log(rand);
-            return rand;
+            return (this.negateSpeedX) ? -1 : 1;
         },
         get speedY() {
-            let rand = Math.random() * 1.2;
-            while (rand < 0.8) {
-                rand = Math.random() * 2.3
-            }
-            console.log(rand);
-            return rand;
+            return (this.negateSpeedY) ? -1 : 1;
         },
         get x() {
             return (canvas.w / 2) + this.stepsX;
         },
         get y() {
             return (canvas.h / 2) + this.stepsY;
+        },
+        init: function () {
+            this.stepsX = Math.random() * -1;
+            this.stepsY = Math.random() * canvas.h - (ball.r * 2) - (canvas.h / 2) - ball.r;
+            if (this.stepsX < 0) {
+                this.negateSpeedX = true;
+            }
+            if (this.stepsY < 0) {
+                this.negateSpeedY = true;
+            }
         }
     }
-
+    ball.init();
     playrs.forEach(playr => {
         drawRect(playr)
     });
     drawCir(ball);
-    canvas.dom.addEventListener('keypress', function (evt) {
-        move(evt, playrs[currntPlayr]);
+    document.body.addEventListener('keypress', function (evt) {
+        movePlayr(evt, playrs[currntPlayr]);
     });
+
+    setInterval(moveBall, 1000 / 60);
+
 
 }
 
+function movePlayr(evt, playr) {
+    if (evt.key == "ArrowUp") {
+        ctx.clearRect(playr.x, playr.y, playr.w, playr.h);
+        playr.steps -= playr.speed;
+
+        if (playr.y < 0) {
+            while (true) {
+                playr.steps++;
+                if (playr.y == 0) {
+                    break;
+                }
+            }
+        }
+
+        drawRect(playr);
+    }
+    if (evt.key == "ArrowDown") {
+        ctx.clearRect(playr.x, playr.y, playr.w, playr.h);
+        playr.steps += playr.speed;
+
+        if (playr.y > (canvas.h - playr.h)) {
+            while (true) {
+                playr.steps--;
+                if (playr.y == (canvas.h - playr.h)) {
+                    break;
+                }
+            }
+        }
+
+        drawRect(playr);
+    }
+}
+
+function moveBall() {
+    if(ball==null){
+        return 0;
+    }
+    ctx.clearRect(ball.x - ball.r, ball.y - ball.r, ball.r * 2, ball.r * 2);
+    ball.stepsX += ball.speedX;
+    ball.stepsY += ball.speedY;
+    console.log(ball.negateSpeedX);
+    console.log(ball.negateSpeedY);
+
+    //Checking if ball hit the area of player-0
+    if (ball.stepsX < -(canvas.w / 2 - playrsCP.w - ball.r)) {
+        console.log(ball.y);
+        console.log(playrs[currntPlayr].y);
+        if (ballIsHit()) {
+            ball.stepsX = -(canvas.w / 2 - playrsCP.w - ball.r);
+            currntPlayr = Number(!currntPlayr);
+            //testCollision(ball, playrs[0]);
+            ball.negateSpeedX = false;
+        }
+    }
+    //Checking if ball hit the area of player-1
+    if (ball.stepsX > (canvas.w / 2 - playrsCP.w - ball.r)) {
+        if (ballIsHit()) {
+            ball.stepsX = canvas.w / 2 - playrsCP.w - ball.r;
+            //testCollision(ball, playrs[1]);
+            currntPlayr = Number(!currntPlayr);
+            ball.negateSpeedX = true;
+        }
+    }
+    //Checking if Ball hit the bottom of canvas
+    if (ball.stepsY > canvas.h / 2 - ball.r) {
+        ball.stepsY = canvas.h / 2 - ball.r;
+        ball.negateSpeedY = true;
+    }
+    //Checking if Ball hit the top of canvas
+    if (ball.stepsY < -(canvas.h / 2) + ball.r) {
+        ball.stepsY = -(canvas.h / 2) + ball.r;
+        ball.negateSpeedY = false;
+    }
+    //Checking if Ball went Beyond the width of canvas in either direction
+    if (ball.x<0 || ball.x>canvas.w){
+        ball=null;
+        gameOver();
+        return 0;
+    }
+    drawCir(ball);
+
+
+}
+function ballIsHit() {
+    if (ball.y > playrs[currntPlayr].y && ball.y < playrs[currntPlayr].y + playrs[currntPlayr].h) {
+        return true;
+    }
+    return false;
+}
 function drawRect(playr) {
     ctx.save();
-    console.log(playr.color);
-    console.log(playr.x + " " + playr.y + " " + playr.w + " " + playr.h);
     ctx.fillStyle = playr.color;
     ctx.fillRect(playr.x, playr.y, playr.w, playr.h);
     ctx.restore();
@@ -94,4 +183,8 @@ function drawCir(ball) {
     ctx.arc(ball.x, ball.y, ball.r, 0, Math.PI * 2);
     ctx.fill();
     ctx.restore();
+}
+function gameOver() {
+    document.getElementById('#GameOver').display="block";
+    
 }
