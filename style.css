@@ -37,34 +37,6 @@ header h1 {
   text-align: center;
 }
 
-main {
-  position: relative;
-}
-
-main .player {
-  position: absolute;
-  height: 150px;
-  width: 30px;
-}
-
-main #player-0 {
-  left: 0;
-  top: 30%;
-}
-
-main #player-1 {
-  right: 0;
-  top: 30%;
-}
-
-main #ball {
-  position: absolute;
-  top: 48%;
-  left: 48%;
-  height: 25px;
-  width: 25px;
-}
-
 footer {
   background-color: #333;
   color: #ccc;
@@ -113,9 +85,9 @@ body {
           flex-flow: column nowrap;
 }
 
-body main {
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
+body canvas {
+  width: 300px;
+  height: 400px;
+  border: 1px solid black;
 }
 /*# sourceMappingURL=style.css.map */
