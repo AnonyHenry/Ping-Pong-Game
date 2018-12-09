@@ -1,6 +1,6 @@
 let canvas, ctx, playrs, playrsCP, ball;
 let currntPlayr = 0;
-window.onload = function init() {
+window.onload =function init() {
     canvas = {
         dom: document.getElementById('playGround'),
         get w() {
@@ -85,7 +85,10 @@ window.onload = function init() {
         movePlayr(evt, playrs[currntPlayr], "DOWN");
 
     });
-    setInterval(moveBall, 1000 / 60);
+    setTimeout(function(){
+        setInterval(moveBall, 1000 / 60);
+    }, 3000)
+    
 
 
 }
