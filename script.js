@@ -87,7 +87,7 @@ window.onload =function init() {
     });
     setTimeout(function(){
         setInterval(moveBall, 1000 / 60);
-    }, 3000)
+    }, 3000);
     
 
 
