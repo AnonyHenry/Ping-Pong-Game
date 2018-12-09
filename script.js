@@ -75,21 +75,32 @@ window.onload = function init() {
     document.body.addEventListener('keypress', function (evt) {
         movePlayr(evt, playrs[currntPlayr]);
     });
+    //Mobile Compatibility
+    document.body.addEventListener('click', function(evt){
+        if(evt.clientY < (innerHeight/2)){
+            movePlayr(evt, playrs[currntPlayr], "UP");
+            return 0;
+        }
+        movePlayr(evt, playrs[currntPlayr], "DOWN");
 
+    });
     setInterval(moveBall, 1000 / 60);
 
 
 }
 
-function movePlayr(evt, playr) {
-    if (evt.key == "ArrowUp") {
-        ctx.clearRect(playr.x, playr.y, playr.w, playr.h);
-        playr.steps -= playr.speed;
+function movePlayr(evt, playr, dir) {
+    let speed;
+    if(dir=="UP" || dir=="DOWN") speed=15;
+    else speed=playr.speed;
 
+    if (evt.key === "ArrowUp" || dir==="UP") {
+        ctx.clearRect(playr.x, playr.y, playr.w, playr.h);
+        playr.steps -= speed;
         if (playr.y < 0) {
             while (true) {
                 playr.steps++;
-                if (playr.y == 0) {
+                if (playr.y === 0) {
                     break;
                 }
             }
@@ -97,14 +108,14 @@ function movePlayr(evt, playr) {
 
         drawRect(playr);
     }
-    if (evt.key == "ArrowDown") {
+    if (evt.key === "ArrowDown" || dir==="DOWN") {
         ctx.clearRect(playr.x, playr.y, playr.w, playr.h);
-        playr.steps += playr.speed;
+        playr.steps += speed;
 
         if (playr.y > (canvas.h - playr.h)) {
             while (true) {
                 playr.steps--;
-                if (playr.y == (canvas.h - playr.h)) {
+                if (playr.y === (canvas.h - playr.h)) {
                     break;
                 }
             }
@@ -115,7 +126,7 @@ function movePlayr(evt, playr) {
 }
 
 function moveBall() {
-    if(ball==null){
+    if(ball===null){
         return 0;
     }
     ctx.clearRect(ball.x - ball.r, ball.y - ball.r, ball.r * 2, ball.r * 2);
