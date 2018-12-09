@@ -76,8 +76,9 @@ window.onload = function init() {
         movePlayr(evt, playrs[currntPlayr]);
     });
     //Mobile Compatibility
-    document.body.addEventListener('click', function(evt){
-        if(evt.clientY < (innerHeight/2)){
+    canvas.dom.addEventListener('click', function(evt){
+        headerHeight=parseInt(getComputedStyle(document.querySelector('header')).height);
+        if(evt.clientY-headerHeight < (canvas.h/2)){
             movePlayr(evt, playrs[currntPlayr], "UP");
             return 0;
         }
@@ -192,5 +193,5 @@ function drawCir(ball) {
     ctx.restore();
 }
 function gameOver() {
-    document.getElementById('GameOver').classList.remove('d-none');
+    document.getElementById('GameOver').classList.remove('d-noe');
 }
