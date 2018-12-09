@@ -193,5 +193,5 @@ function drawCir(ball) {
     ctx.restore();
 }
 function gameOver() {
-    document.getElementById('GameOver').classList.remove('d-noe');
+    document.getElementById('GameOver').classList.remove('d-none');
 }
