@@ -45,10 +45,10 @@ window.onload =function init() {
         negateSpeedX: false,
         negateSpeedY: false,
         get speedX() {
-            return (this.negateSpeedX) ? -1 : 1;
+            return (this.negateSpeedX) ? -1.35 : 1.35;
         },
         get speedY() {
-            return (this.negateSpeedY) ? -1 : 1;
+            return (this.negateSpeedY) ? -1.35 : 1.35;
         },
         get x() {
             return (canvas.w / 2) + this.stepsX;
