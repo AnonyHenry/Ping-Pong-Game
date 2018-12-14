@@ -26,7 +26,7 @@ let songs = [
     },
 ];
 
-randomIndex=Math.floor(Math.random()*songs.length-1);
+randomIndex=Math.floor(Math.random()*(songs.length-1));
 audio=document.createElement('audio');
 audio.src=songs[randomIndex].src +'.mp3';
 audio.autoplay='autoplay';
