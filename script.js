@@ -133,7 +133,9 @@ function moveBall() {
     if(ball===null){
         return 0;
     }
-    ctx.clearRect(ball.x - ball.r, ball.y - ball.r, ball.r * 2, ball.r * 2);
+    ctx.clearRect((ball.x - ball.r)+ 1, (ball.y - ball.r)+ 1, ball.r * 2, ball.r * 2);
+    ctx.clearRect((ball.x - ball.r)- 1, (ball.y - ball.r)- 1, ball.r * 2, ball.r * 2);
+    
     ball.stepsX += ball.speedX;
     ball.stepsY += ball.speedY;
 
