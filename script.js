@@ -1,6 +1,6 @@
 let canvas, ctx, playrs, playrsCP, ball;
 let currntPlayr = 0;
-window.onload =function init() {
+window.onload = function init() {
     canvas = {
         dom: document.getElementById('playGround'),
         get w() {
@@ -21,7 +21,7 @@ window.onload =function init() {
     };
     playrs = [
         {
-            color: '#bb7777',
+            color: '#0d0',
             get x() {
                 return 0;
             },
@@ -29,7 +29,7 @@ window.onload =function init() {
             __proto__: playrsCP
         },
         {
-            color: '#7777bb',
+            color: '#00d',
             get x() {
                 return canvas.w - this.w;
             },
@@ -57,13 +57,19 @@ window.onload =function init() {
             return (canvas.h / 2) + this.stepsY;
         },
         init: function () {
-            this.stepsX = Math.random() * -1;
-            this.stepsY = Math.random() * canvas.h - (ball.r * 2) - (canvas.h / 2) - ball.r;
-            if (this.stepsX < 0) {
-                this.negateSpeedX = true;
-            }
-            if (this.stepsY < 0) {
-                this.negateSpeedY = true;
+            while (true) {
+                this.stepsX = Math.random() * -1;
+                this.stepsY = Math.random() * canvas.h - (this.r * 2) - (canvas.h / 2) - this.r;
+                if (this.stepsX < 0) {
+                    this.negateSpeedX = true;
+                }
+                if (this.stepsY < 0) {
+                    this.negateSpeedY = true;
+                }
+                //Temporary Ball outside canvas bug fix
+                if (this.y >= this.r) {
+                    break;
+                }
             }
         }
     }
@@ -76,29 +82,29 @@ window.onload =function init() {
         movePlayr(evt, playrs[currntPlayr]);
     });
     //Mobile Compatibility
-    canvas.dom.addEventListener('click', function(evt){
-        headerHeight=parseInt(getComputedStyle(document.querySelector('header')).height);
-        if(evt.clientY-headerHeight < (canvas.h/2)){
+    canvas.dom.addEventListener('click', function (evt) {
+        headerHeight = parseInt(getComputedStyle(document.querySelector('header')).height);
+        if (evt.clientY - headerHeight < (canvas.h / 2)) {
             movePlayr(evt, playrs[currntPlayr], "UP");
             return 0;
         }
         movePlayr(evt, playrs[currntPlayr], "DOWN");
 
     });
-    setTimeout(function(){
+    setTimeout(function () {
         setInterval(moveBall, 1000 / 60);
     }, 3000);
-    
+
 
 
 }
 
 function movePlayr(evt, playr, dir) {
     let speed;
-    if(dir=="UP" || dir=="DOWN") speed=15;
-    else speed=playr.speed;
+    if (dir == "UP" || dir == "DOWN") speed = 15;
+    else speed = playr.speed;
 
-    if (evt.key === "ArrowUp" || dir==="UP") {
+    if (evt.key === "ArrowUp" || dir === "UP") {
         ctx.clearRect(playr.x, playr.y, playr.w, playr.h);
         playr.steps -= speed;
         if (playr.y < 0) {
@@ -112,7 +118,7 @@ function movePlayr(evt, playr, dir) {
 
         drawRect(playr);
     }
-    if (evt.key === "ArrowDown" || dir==="DOWN") {
+    if (evt.key === "ArrowDown" || dir === "DOWN") {
         ctx.clearRect(playr.x, playr.y, playr.w, playr.h);
         playr.steps += speed;
 
@@ -130,12 +136,12 @@ function movePlayr(evt, playr, dir) {
 }
 
 function moveBall() {
-    if(ball===null){
+    if (ball === null) {
         return 0;
     }
-    ctx.clearRect((ball.x - ball.r)+ 1, (ball.y - ball.r)+ 1, ball.r * 2, ball.r * 2);
-    ctx.clearRect((ball.x - ball.r)- 1, (ball.y - ball.r)- 1, ball.r * 2, ball.r * 2);
-    
+    ctx.clearRect((ball.x - ball.r) + 1, (ball.y - ball.r) + 1, ball.r * 2, ball.r * 2);
+    ctx.clearRect((ball.x - ball.r) - 1, (ball.y - ball.r) - 1, ball.r * 2, ball.r * 2);
+
     ball.stepsX += ball.speedX;
     ball.stepsY += ball.speedY;
 
@@ -168,8 +174,8 @@ function moveBall() {
         ball.negateSpeedY = false;
     }
     //Checking if Ball went Beyond the width of canvas in either direction
-    if (ball.x< 0-ball.r || ball.x>canvas.w+ball.r){
-        ball=null;
+    if (ball.x < 0 - ball.r || ball.x > canvas.w + ball.r) {
+        ball = null;
         gameOver();
         return 0;
     }

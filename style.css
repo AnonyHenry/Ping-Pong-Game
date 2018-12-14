@@ -15,6 +15,23 @@ header h1 {
   font-family: sans-serif;
 }
 
+main {
+  background-color: #ddd;
+}
+
+main #ball {
+  background-color: red;
+  border-radius: 50%;
+}
+
+main #player-0 {
+  background-color: #772;
+}
+
+main #player-1 {
+  background-color: #277;
+}
+
 header h1 {
   padding: 10px 5px;
   text-align: center;
