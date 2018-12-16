@@ -1,5 +1,7 @@
 let canvas, ctx, playrs, playrsCP, ball;
 let currntPlayr = 0;
+let ballInterval;
+let keyEvent, clickEvent;
 window.onload = function init() {
     canvas = {
         dom: document.getElementById('playGround'),
@@ -78,21 +80,17 @@ window.onload = function init() {
         drawRect(playr)
     });
     drawCir(ball);
-    document.body.addEventListener('keypress', function (evt) {
+    keyEvent= function(evt) {
         movePlayr(evt, playrs[currntPlayr]);
-    });
+    };
+    document.body.addEventListener('keypress',keyEvent);
     //Mobile Compatibility
-    canvas.dom.addEventListener('click', function (evt) {
-        headerHeight = parseInt(getComputedStyle(document.querySelector('header')).height);
-        if (evt.clientY - headerHeight < (canvas.h / 2)) {
-            movePlayr(evt, playrs[currntPlayr], "UP");
-            return 0;
-        }
-        movePlayr(evt, playrs[currntPlayr], "DOWN");
-
-    });
+    clickEvent=function(evt){
+        screenTouchMovePlayrs(evt, playrs[currntPlayr]);
+    }
+    canvas.dom.addEventListener('click',clickEvent);
     setTimeout(function () {
-        setInterval(moveBall, 1000 / 60);
+        ballInterval=setInterval(moveBall, 1000 / 60);
     }, 3000);
 
 
@@ -103,7 +101,6 @@ function movePlayr(evt, playr, dir) {
     let speed;
     if (dir == "UP" || dir == "DOWN") speed = 15;
     else speed = playr.speed;
-
     if (evt.key === "ArrowUp" || dir === "UP") {
         ctx.clearRect(playr.x, playr.y, playr.w, playr.h);
         playr.steps -= speed;
@@ -139,9 +136,9 @@ function moveBall() {
     if (ball === null) {
         return 0;
     }
-    ctx.clearRect((ball.x - ball.r) + 1, (ball.y - ball.r) + 1, ball.r * 2, ball.r * 2);
-    ctx.clearRect((ball.x - ball.r) - 1, (ball.y - ball.r) - 1, ball.r * 2, ball.r * 2);
-
+    ctx.fillStyle='white';
+    ctx.arc(ball.x,ball.y, ball.r+1,0,Math.PI*2);
+    ctx.fill();
     ball.stepsX += ball.speedX;
     ball.stepsY += ball.speedY;
 
@@ -205,4 +202,28 @@ function drawCir(ball) {
 }
 function gameOver() {
     document.getElementById('GameOver').classList.remove('d-none');
+    ctx.clearRect(0,0,canvas.w,canvas.h);
+    document.body.removeEventListener('keypress',keyEvent);
+    canvas.dom.removeEventListener('click',clickEvent);
+    
+    ball=null;
+    playrs=null;
+    playrsCP=null;
+    canvas=null;
+    ctx=null;
+
+    clearInterval(ballInterval);
+}
+function reset(){
+    document.getElementById('GameOver').classList.add('d-none');
+    currntPlayr=0;
+    window.onload();
+}
+function screenTouchMovePlayrs(evt, cP){
+    headerHeight = parseInt(getComputedStyle(document.querySelector('header')).height);
+    if (evt.clientY - headerHeight < (canvas.h / 2)) {
+        movePlayr(evt, cP, "UP");
+        return 0;
+    }
+    movePlayr(evt, cP, "DOWN");
 }

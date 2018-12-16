@@ -106,14 +106,39 @@ body{
     width:100vw;
     text-align:center;
     display:flex;
+    flex-flow:column nowrap;
     justify-content:center;
     align-items:center;
-
     h1{
         color:red;
         font-family:sans-serif;
         font-weight:lighter;
         font-size:3em;
+    }
+    button{
+        font-size:1.2em;
+        margin-top:10px;
+        padding:10px;
+        border-radius:7px;
+        background-color:white;
+        color:black;
+        transition:background-color 0.4s;
+        transition:color 0.4s;
+    }
+    button:hover{
+        color:white;
+    }
+    #restartBtn{
+        border:2px solid #4e4;
+    }
+    #restartBtn:hover{
+        background-color:#4e4;
+    }
+    #changeMusicBtn{
+        border:2px solid #44e;
+    }
+    #changeMusicBtn:hover{
+        background-color:#44e;
     }
 }
 .d-none{

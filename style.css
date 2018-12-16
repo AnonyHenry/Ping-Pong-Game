@@ -126,6 +126,10 @@ body canvas span {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -139,6 +143,39 @@ body canvas span {
   font-family: sans-serif;
   font-weight: lighter;
   font-size: 3em;
+}
+
+#GameOver button {
+  font-size: 1.2em;
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 7px;
+  background-color: white;
+  color: black;
+  -webkit-transition: background-color 0.4s;
+  transition: background-color 0.4s;
+  -webkit-transition: color 0.4s;
+  transition: color 0.4s;
+}
+
+#GameOver button:hover {
+  color: white;
+}
+
+#GameOver #restartBtn {
+  border: 2px solid #4e4;
+}
+
+#GameOver #restartBtn:hover {
+  background-color: #4e4;
+}
+
+#GameOver #changeMusicBtn {
+  border: 2px solid #44e;
+}
+
+#GameOver #changeMusicBtn:hover {
+  background-color: #44e;
 }
 
 .d-none {

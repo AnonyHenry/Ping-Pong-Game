@@ -14,7 +14,11 @@ let songs = [
         src: "D",
         artist: "Luis Fonsi"
     },
-
+    {
+        name: "Let Me Love You",
+        src: "lmg",
+        artist: "Justin Bieber"
+    },
     {
         name: "Let her Go",
         src: "lhg",
@@ -31,25 +35,32 @@ let songs = [
         artist: 'Mike Posner'
     },
 ];
+let audio, randomIndex;
+function backgroundMusic() {
+    if(audio!==undefined){
+        document.body.removeChild(audio);
+    }
+    randomIndex = Math.floor(Math.random() * (songs.length - 1));
+    audio = document.createElement('audio');
+    audio.src = songs[randomIndex].src + '.mp3';
+    audio.autoplay = 'autoplay';
+    audio.loop = 'loop';
+    document.querySelector('header h1').textContent = songs[randomIndex].name;
+    document.body.append(audio);
 
-randomIndex = Math.floor(Math.random() * (songs.length - 1));
-audio = document.createElement('audio');
-audio.src = songs[randomIndex].src + '.mp3';
-audio.autoplay = 'autoplay';
-audio.loop = 'loop';
-document.querySelector('header h1').textContent = songs[randomIndex].name;
-document.body.append(audio);
+    let singerP = document.querySelector('#singer');
+    singerP.textContent = "Song by " + songs[randomIndex].artist;
 
-let singerP = document.querySelector('#singer');
-singerP.textContent = "Music by " + songs[randomIndex].artist;
+    let headerColors = [
+        'rgba(255,0,0,0.7)',
+        'rgb(128,128,0)',
+        'rgba(0,255,0,0.7)',
+        'rgb(0,255,255)',
+        'rgba(0,0,255,0.7)',
+        'rgb(255,0,255)'
+    ];
+    header = document.querySelector('header');
+    header.style.backgroundColor = headerColors[Math.floor(Math.random() * headerColors.length - 1)];
+}
 
-let headerColors = [
-    'rgba(255,0,0,0.7)',
-    'rgb(255,255,0)',
-    'rgba(0,255,0,0.7)',
-    'rgb(0,255,255)',
-    'rgba(0,0,255,0.7)',
-    'rgb(255,0,255)'
-];
-header=document.querySelector('header');
-header.style.backgroundColor=headerColors[Math.floor(Math.random()* headerColors.length-1)];
+backgroundMusic();
