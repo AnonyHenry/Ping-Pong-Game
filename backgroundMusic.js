@@ -1,5 +1,45 @@
 let songs = [
     {
+		name:"Believer",
+		src: "believer",
+		artist: "Imagine Dragons"
+    },
+    {
+		name:"Chahun Main Ya Na",
+		src: "chahun_main_ya_na",
+		artist: "Arijit Singh"
+	},
+	{
+		name:"Happier",
+		src: "happier",
+		artist: "Ed Sheeran"
+	},	
+	{
+		name:"Laudy Daudy",
+		src:"laudy",
+		artist:"Prntz"
+	},
+	{
+		name:"Mai Tera Boyfriend",
+		src:"mai_tera_boyfriend",
+		artist:"Arijit Singh"
+	},
+	{
+		name:"Perfect",
+		src:"perfect",
+		artist:"Ed Sheeran"
+	},
+	{
+		name:"Sanam Re",
+		src:"sanam",
+		artist:"Arijit Singh and Mithoon"
+	},
+	{
+		name:"Taki Taki",
+		src:"taki",
+		artist:"DJ Snake, Slena Gomez, Ozuna and Cardi B"
+	},    
+	{
         name: "Melody",
         src: "m",
         artist: "John Becker"
@@ -17,7 +57,7 @@ let songs = [
     {
         name: "Let Me Love You",
         src: "lmg",
-        artist: "Justin Bieber"
+        artist: "Justin Bieber and DJ Snake"
     },
     {
         name: "Let her Go",

@@ -47,10 +47,10 @@ window.onload = function init() {
         negateSpeedX: false,
         negateSpeedY: false,
         get speedX() {
-            return (this.negateSpeedX) ? -1.35 : 1.35;
+            return (this.negateSpeedX) ? -1 : 1;
         },
         get speedY() {
-            return (this.negateSpeedY) ? -1.35 : 1.35;
+            return (this.negateSpeedY) ? -1 : 1;
         },
         get x() {
             return (canvas.w / 2) + this.stepsX;
@@ -90,7 +90,7 @@ window.onload = function init() {
     }
     canvas.dom.addEventListener('click',clickEvent);
     setTimeout(function () {
-        ballInterval=setInterval(moveBall, 1000 / 60);
+        ballInterval=setInterval(moveBall, 1000 / 90);
     }, 3000);
 
 
@@ -99,7 +99,7 @@ window.onload = function init() {
 
 function movePlayr(evt, playr, dir) {
     let speed;
-    if (dir == "UP" || dir == "DOWN") speed = 15;
+    if (dir == "UP" || dir == "DOWN") speed = 17;
     else speed = playr.speed;
     if (evt.key === "ArrowUp" || dir === "UP") {
         ctx.clearRect(playr.x, playr.y, playr.w, playr.h);
@@ -137,7 +137,7 @@ function moveBall() {
         return 0;
     }
     ctx.fillStyle='white';
-    ctx.arc(ball.x,ball.y, ball.r+1,0,Math.PI*2);
+    ctx.arc(ball.x,ball.y, ball.r+4,0,Math.PI*2);
     ctx.fill();
     ball.stepsX += ball.speedX;
     ball.stepsY += ball.speedY;
