@@ -104,3 +104,15 @@ function backgroundMusic() {
 }
 
 backgroundMusic();
+function playPause(){
+    let playPauseBtn=document.querySelector("#playPauseBtn");
+    if (playPauseBtn.classList.contains("fa-pause")){
+        playPauseBtn.classList.remove("fa-pause");
+        audio.pause();
+        playPauseBtn.classList.add("fa-play");
+    } else {
+        playPauseBtn.classList.remove("fa-play");
+        audio.play();
+        playPauseBtn.classList.add("fa-pause");
+    }
+}
