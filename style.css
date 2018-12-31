@@ -24,6 +24,10 @@ header .music-control:hover {
   background-color: rgba(0, 0, 0, 0.3);
 }
 
+header .music-control:active {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
 header h1 {
   -webkit-box-flex: 1;
       -ms-flex: 1;
@@ -148,7 +152,8 @@ body canvas span {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding-top: 150px;
+  padding-top: 50px;
+  margin-top: 100px;
 }
 
 #GameOver h1 {
@@ -158,20 +163,18 @@ body canvas span {
   font-size: 3em;
 }
 
-#GameOver button {
+#GameOver #restartBtn, #GameOver #changeMusicBtn {
   font-size: 1.2em;
   margin-top: 10px;
   padding: 10px;
   border-radius: 7px;
   background-color: white;
   color: black;
-  -webkit-transition: background-color 0.4s;
-  transition: background-color 0.4s;
-  -webkit-transition: color 0.4s;
-  transition: color 0.4s;
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
 }
 
-#GameOver button:hover {
+#GameOver #restartBtn:hover, #GameOver #changeMusicBtn:hover {
   color: white;
 }
 
@@ -193,5 +196,41 @@ body canvas span {
 
 .d-none {
   display: none !important;
+}
+
+#songSelect {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 10px 5px;
+}
+
+#songSelectBtn {
+  background-color: white;
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  padding: 10px;
+  color: black;
+  border: 2px solid #990;
+  border-left: none;
+  font-size: 1.2rem;
+}
+
+#songSelectInput {
+  background-color: #f7f7f7;
+  color: black;
+  border: #333 solid 1px;
+  width: 200px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  padding: 10px;
+  font-size: 1.2rem;
+}
+
+#songSelectBtn:hover {
+  background-color: #990;
+  color: white;
 }
 /*# sourceMappingURL=style.css.map */

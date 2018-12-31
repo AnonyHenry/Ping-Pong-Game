@@ -12,9 +12,7 @@
 
 <body>
     <header>
-        <div class="music-control">
-            <i class="fa fa-pause" onclick="playPause()" id="playPauseBtn"></i>
-        </div>
+        <i class="fa fa-pause music-control" id="playPauseBtn" onclick="playPause()"></i>
         <h1></h1>
         <div class="music-control">
             <i class="fa fa-random" onclick="backgroundMusic()"></i>
@@ -36,8 +34,12 @@
         <br>
         <button onclick="reset()" id="restartBtn">Restart Game</button>
         <button onclick="backgroundMusic()" id="changeMusicBtn">Change Music</button>
+        
+        <div id="songSelect">
+        <input type="text" list="songsList" placeholder="Enter Song's Name" id="songSelectInput">
+        <button id="songSelectBtn" onclick="songSelected()">Change Music</button>
+        </div>
     </div>
-    <script src="backgroundMusic.js"></script>
     <script src="script.js"></script>
 </body>
 

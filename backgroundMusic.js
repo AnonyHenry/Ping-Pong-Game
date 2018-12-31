@@ -1,45 +1,45 @@
 let songs = [
     {
-		name:"Believer",
-		src: "believer",
-		artist: "Imagine Dragons"
+        name: "Believer",
+        src: "believer",
+        artist: "Imagine Dragons"
     },
     {
-		name:"Chahun Main Ya Na",
-		src: "chahun_main_ya_na",
-		artist: "Arijit Singh"
-	},
-	{
-		name:"Happier",
-		src: "happier",
-		artist: "Ed Sheeran"
-	},	
-	{
-		name:"Laudy Daudy",
-		src:"laudy",
-		artist:"Prntz"
-	},
-	{
-		name:"Mai Tera Boyfriend",
-		src:"mai_tera_boyfriend",
-		artist:"Arijit Singh"
-	},
-	{
-		name:"Perfect",
-		src:"perfect",
-		artist:"Ed Sheeran"
-	},
-	{
-		name:"Sanam Re",
-		src:"sanam",
-		artist:"Arijit Singh and Mithoon"
-	},
-	{
-		name:"Taki Taki",
-		src:"taki",
-		artist:"DJ Snake, Slena Gomez, Ozuna and Cardi B"
-	},    
-	{
+        name: "Chahun Main Ya Na",
+        src: "chahun_main_ya_na",
+        artist: "Arijit Singh"
+    },
+    {
+        name: "Happier",
+        src: "happier",
+        artist: "Ed Sheeran"
+    },
+    {
+        name: "Laudy Daudy",
+        src: "laudy",
+        artist: "Prntz"
+    },
+    {
+        name: "Mai Tera Boyfriend",
+        src: "mai_tera_boyfriend",
+        artist: "Arijit Singh"
+    },
+    {
+        name: "Perfect",
+        src: "perfect",
+        artist: "Ed Sheeran"
+    },
+    {
+        name: "Sanam Re",
+        src: "sanam",
+        artist: "Arijit Singh and Mithoon"
+    },
+    {
+        name: "Taki Taki",
+        src: "taki",
+        artist: "DJ Snake, Slena Gomez, Ozuna and Cardi B"
+    },
+    {
         name: "Melody",
         src: "m",
         artist: "John Becker"
@@ -76,8 +76,11 @@ let songs = [
     },
 ];
 let audio, randomIndex;
+let playPauseBtn = document.querySelector("#playPauseBtn");
+playPauseBtn.addEventListener('click', playPause);
+
 function backgroundMusic() {
-    if(audio!==undefined){
+    if (audio !== undefined) {
         document.body.removeChild(audio);
     }
     randomIndex = Math.floor(Math.random() * (songs.length - 1));
@@ -101,12 +104,18 @@ function backgroundMusic() {
     ];
     header = document.querySelector('header');
     header.style.backgroundColor = headerColors[Math.floor(Math.random() * headerColors.length - 1)];
+
+    if (playPauseBtn.classList.contains('fa-play')) {
+        playPauseBtn.classList.remove('fa-play');
+        playPauseBtn.classList.add('fa-pause');
+    }
+
 }
 
 backgroundMusic();
-function playPause(){
-    let playPauseBtn=document.querySelector("#playPauseBtn");
-    if (playPauseBtn.classList.contains("fa-pause")){
+function playPause() {
+    console.log("pressed");
+    if (playPauseBtn.classList.contains("fa-pause")) {
         playPauseBtn.classList.remove("fa-pause");
         audio.pause();
         playPauseBtn.classList.add("fa-play");
