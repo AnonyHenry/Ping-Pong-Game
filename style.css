@@ -238,8 +238,8 @@ body canvas span {
   position: fixed;
   width: 100%;
   height: 100%;
-  background-color: #333;
-  color: #eee;
+  background-color: #efefef;
+  color: #333;
   font-family: sans-serif;
   z-index: 3;
   text-align: center;
@@ -247,7 +247,7 @@ body canvas span {
 }
 
 #welcome a {
-  color: powderblue;
+  color: #277;
   text-decoration: none;
 }
 
@@ -277,7 +277,7 @@ body canvas span {
 
 @-webkit-keyframes color-change {
   0% {
-    color: #eee;
+    color: #111;
   }
   16% {
     color: #f58;
@@ -295,13 +295,13 @@ body canvas span {
     color: #f58;
   }
   100% {
-    color: #eee;
+    color: #111;
   }
 }
 
 @keyframes color-change {
   0% {
-    color: #eee;
+    color: #111;
   }
   16% {
     color: #f58;
@@ -319,7 +319,7 @@ body canvas span {
     color: #f58;
   }
   100% {
-    color: #eee;
+    color: #111;
   }
 }
 /*# sourceMappingURL=style.css.map */
