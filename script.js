@@ -2,7 +2,8 @@ let canvas, ctx, playrs, playrsCP, ball;
 let currntPlayr = 0;
 let ballInterval;
 let keyEvent, clickEvent;
-let noMusic=false;
+let noMusic = false;
+let ballTimeout=9000, welcomeshow = true;;
 let songs = [
     {
         name: "Believer",
@@ -71,48 +72,48 @@ let songs = [
     },
     {
         name: "Tujhme Rab Dikhta Hai",
-        src:"rab",
+        src: "rab",
         artist: "Roop Kumar Rathod"
     },
     {
         name: "Sorry",
-        src:"sorry",
-        artist:"Justin Bieber"
+        src: "sorry",
+        artist: "Justin Bieber"
     },
     {
-        name:"Echame La Culpa",
-        src:"echame",
-        artist:"Luis Fonsi, Demi Lovato"
+        name: "Echame La Culpa",
+        src: "echame",
+        artist: "Luis Fonsi, Demi Lovato"
     },
     {
         name: "Photograph",
-        src:"photo",
+        src: "photo",
         artist: "Ed Sheeran"
     },
     {
         name: "Magenta Riddim",
-        src:"magenta",
-        artist:"DJ Snake"
+        src: "magenta",
+        artist: "DJ Snake"
     },
     {
         name: "Love Yourself",
-        src:"love_yourself",
+        src: "love_yourself",
         artist: "Justin Bieber"
     },
     {
         name: "Jashan E Bahara",
-        src:"jashan",
+        src: "jashan",
         artist: "Javed Ali"
     },
     {
-        name:"Dil Diyaan Gallan",
-        src:"gallan",
-        artist:"Atif Aslam"
+        name: "Dil Diyaan Gallan",
+        src: "gallan",
+        artist: "Atif Aslam"
     },
     {
-        name:"Bom Diggy Diggy",
-        src:"bom",
-        artist:"Zack Knight, Jasmin Walia"
+        name: "Bom Diggy Diggy",
+        src: "bom",
+        artist: "Zack Knight, Jasmin Walia"
     }
 ];
 let audio, randomIndex;
@@ -163,10 +164,10 @@ window.onload = function init() {
         negateSpeedX: false,
         negateSpeedY: false,
         get speedX() {
-            return (this.negateSpeedX) ? -1.75 : 1.75;
+            return (this.negateSpeedX) ? -1.65 : 1.65;
         },
         get speedY() {
-            return (this.negateSpeedY) ? -1.75 : 1.75;
+            return (this.negateSpeedY) ? -1.65 : 1.65;
         },
         get x() {
             return (canvas.w / 2) + this.stepsX;
@@ -210,14 +211,21 @@ window.onload = function init() {
         screenTouchMovePlayrs(evt, playrs[currntPlayr]);
     }
     canvas.dom.addEventListener('click', clickEvent);
-    setTimeout(function (){
-        document.getElementById('welcome').classList.add('d-none')
-    }, 6000)
+
     setTimeout(function () {
         ballInterval = setInterval(moveBall, 1000 / 55);
-    }, 10000);
-    if(noMusic==false){
-    backgroundMusic();
+    }, ballTimeout);
+
+    if (welcomeshow === true) {
+        setTimeout(function () {
+            document.getElementById('welcome').classList.add('d-none');
+            welcomeshow = false;
+            ballTimeout -= 6000;
+        }, 6000)
+    }
+
+    if (noMusic == false) {
+        backgroundMusic();
     }
 }
 
@@ -340,9 +348,9 @@ function gameOver() {
 function reset() {
     gameOverDOM.classList.add('d-none');
     currntPlayr = 0;
-    noMusic=true;
+    noMusic = true;
     window.onload();
-    noMusic=false;
+    noMusic = false;
 }
 function screenTouchMovePlayrs(evt, cP) {
     headerHeight = parseInt(getComputedStyle(document.querySelector('header')).height);
@@ -364,8 +372,8 @@ function backgroundMusic(songIndex) {
     if (audio !== undefined) {
         document.body.removeChild(audio);
     }
-    if (songIndex===undefined) randomIndex = Math.floor(Math.random() * (songs.length - 1));
-    else randomIndex=songIndex;
+    if (songIndex === undefined) randomIndex = Math.floor(Math.random() * (songs.length - 1));
+    else randomIndex = songIndex;
     audio = document.createElement('audio');
     audio.src = songs[randomIndex].src + '.mp3';
     audio.autoplay = 'autoplay';
@@ -407,30 +415,30 @@ function playPause() {
         playPauseBtn.classList.add("fa-pause");
     }
 }
- function createSongsDatalist(){
-    let datalist=document.createElement('datalist');
-    datalist.id="songsList";
+function createSongsDatalist() {
+    let datalist = document.createElement('datalist');
+    datalist.id = "songsList";
     let option;
-    let i=0;
-    while(i<songs.length){
-        option=document.createElement('option');
-        option.value=songs[i].name;
-        option.textContent=songs[i].name;
+    let i = 0;
+    while (i < songs.length) {
+        option = document.createElement('option');
+        option.value = songs[i].name;
+        option.textContent = songs[i].name;
         datalist.append(option);
         i++;
     }
     gameOverDOM.append(datalist);
- }
+}
 
- function songSelected(){
-     let input=document.querySelector('#songSelectInput').value;
-     console.log(input);
-    
-     songs.forEach(
-         function(song, index){
-            if(song.name===input){
+function songSelected() {
+    let input = document.querySelector('#songSelectInput').value;
+    console.log(input);
+
+    songs.forEach(
+        function (song, index) {
+            if (song.name === input) {
                 backgroundMusic(index);
             }
-         }
-     )
- }
+        }
+    )
+}
