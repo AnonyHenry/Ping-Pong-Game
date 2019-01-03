@@ -189,3 +189,59 @@ body{
     background-color:#990;
     color:white;
 }
+#welcome{
+    position:fixed;
+    width: 100%;
+    height: 100%;
+    background-color:#333;
+    color:#eee;
+    font-family:sans-serif;
+    z-index:3;
+    text-align:center;
+    padding-top:150px;
+    a{
+        color:powderblue;
+        text-decoration:none;
+    }
+    h2{
+        font-size:1.5rem;
+        font-weight:150;
+    }
+    div{
+        margin-bottom:50px;
+    }
+    h1{
+        font-family:cursive;
+        font-size:5rem;
+        font-weight:100;
+        margin-bottom:50px;
+        animation-name: color-change;
+        animation-duration: 3s;
+        animation-fill-mode: forwards;
+        animation-timing-function: ease-in;
+
+    }
+    @keyframes color-change {
+        0%{
+            color:#eee
+        }
+        16%{
+            color:#f58;
+        }
+        37%{
+            color:#4e4;
+        }
+        50%{
+            color:#772;
+        }
+        70%{
+            color:#4e4;
+        }
+        86%{
+            color:#f58;
+        }
+        100%{
+            color:#eee;
+        }
+    }
+}

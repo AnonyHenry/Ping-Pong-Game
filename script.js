@@ -75,6 +75,16 @@ let songs = [
         artist: "Roop Kumar Rathod"
     },
     {
+        name: "Sorry",
+        src:"sorry",
+        artist:"Justin Bieber"
+    },
+    {
+        name:"Echame La Culpa",
+        src:"echame",
+        artist:"Luis Fonsi, Demi Lovato"
+    },
+    {
         name: "Photograph",
         src:"photo",
         artist: "Ed Sheeran"
@@ -200,9 +210,12 @@ window.onload = function init() {
         screenTouchMovePlayrs(evt, playrs[currntPlayr]);
     }
     canvas.dom.addEventListener('click', clickEvent);
+    setTimeout(function (){
+        document.getElementById('welcome').classList.add('d-none')
+    }, 4000)
     setTimeout(function () {
         ballInterval = setInterval(moveBall, 1000 / 55);
-    }, 4000);
+    }, 8000);
     if(noMusic==false){
     backgroundMusic();
     }
