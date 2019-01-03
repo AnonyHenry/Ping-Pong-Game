@@ -212,10 +212,10 @@ window.onload = function init() {
     canvas.dom.addEventListener('click', clickEvent);
     setTimeout(function (){
         document.getElementById('welcome').classList.add('d-none')
-    }, 4000)
+    }, 6000)
     setTimeout(function () {
         ballInterval = setInterval(moveBall, 1000 / 55);
-    }, 8000);
+    }, 10000);
     if(noMusic==false){
     backgroundMusic();
     }

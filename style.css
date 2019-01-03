@@ -267,8 +267,8 @@ body canvas span {
   margin-bottom: 50px;
   -webkit-animation-name: color-change;
           animation-name: color-change;
-  -webkit-animation-duration: 3s;
-          animation-duration: 3s;
+  -webkit-animation-duration: 5.5s;
+          animation-duration: 5.5s;
   -webkit-animation-fill-mode: forwards;
           animation-fill-mode: forwards;
   -webkit-animation-timing-function: ease-in;
